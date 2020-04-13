@@ -1,4 +1,3 @@
-extern crate prime;
 use std::fs;
 use std::*;
 
@@ -9,14 +8,24 @@ fn main() {
 
     for num in data {
         match num.parse::<i64>() {
-            Ok(n) => {
-                if prime::is_prime(n) {
-                    println!("1")
-                } else {
-                    println!("0")
-                }
-            }
+            Ok(n) => print_prime(n),
             _ => continue,
         }
     }
+}
+
+fn print_prime(number: i64) {
+    if number <=3 {
+        println!("1")
+    } else if number % 2 == 0 || number % 3 == 0 {
+        println!("0")
+    }
+    let border = ((number as f64).sqrt() + 1.0) as i64;
+
+    for i in (5..border).step_by(6) {
+        if number % i == 0 || number % (i + 2) == 0 {
+            println!("0")
+        }
+    }
+    println!("1")
 }
