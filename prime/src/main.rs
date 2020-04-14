@@ -8,24 +8,30 @@ fn main() {
 
     for num in data {
         match num.parse::<i64>() {
-            Ok(n) => print_prime(n),
+            Ok(n) => {
+                if is_prime(n) {
+                    println!("1")
+                } else {
+                    println!("0")
+                }
+            }
             _ => continue,
         }
     }
 }
 
-fn print_prime(number: i64) {
+fn is_prime(number: i64) -> bool {
     if number <=3 {
-        println!("1")
-    } else if number % 2 == 0 || number % 3 == 0 {
-        println!("0")
+        return true;
+    } else if number % 2 == 0 {
+        return false;
     }
     let border = ((number as f64).sqrt() + 1.0) as i64;
 
-    for i in (5..border).step_by(6) {
-        if number % i == 0 || number % (i + 2) == 0 {
-            println!("0")
+    for i in (3..border).step_by(2) {
+        if number % i == 0 {
+            return false;
         }
     }
-    println!("1")
+    return true;
 }
